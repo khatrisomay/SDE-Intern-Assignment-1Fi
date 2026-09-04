@@ -1,13 +1,16 @@
 import React from 'react';
-import { Wifi, Battery, Signal } from 'lucide-react';
+import { Wifi, Battery, Signal, Monitor } from 'lucide-react';
+import { useViewMode } from '../../context/ViewModeContext';
 
 interface DeviceFrameProps {
   children: React.ReactNode;
-  isDesktopFrame: boolean;
+  isDesktopFrame?: boolean;
 }
 
-export const DeviceFrame: React.FC<DeviceFrameProps> = ({ children, isDesktopFrame }) => {
-  if (!isDesktopFrame) {
+export const DeviceFrame: React.FC<DeviceFrameProps> = ({ children }) => {
+  const { isPhoneSimulator, togglePhoneSimulator } = useViewMode();
+
+  if (!isPhoneSimulator) {
     return (
       <div className="min-h-screen bg-white text-gray-900 flex flex-col w-full antialiased selection:bg-[#712CDC]/10 selection:text-[#712CDC]">
         {children}
@@ -16,15 +19,32 @@ export const DeviceFrame: React.FC<DeviceFrameProps> = ({ children, isDesktopFra
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-2 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-3 sm:p-6 md:p-8">
+      {/* Top Simulator Control Bar */}
+      <div className="mb-4 flex items-center gap-3">
+        <div className="flex items-center gap-2 bg-slate-800/90 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg border border-slate-700">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>iPhone 16 Pro Simulator</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={togglePhoneSimulator}
+          className="flex items-center gap-2 bg-[#712CDC] hover:bg-[#802ef2] text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
+        >
+          <Monitor className="w-4 h-4" />
+          <span>Exit to Full Web View</span>
+        </button>
+      </div>
+
       {/* Outer Phone Bezel */}
-      <div className="relative w-full max-w-[440px] h-[92vh] max-h-[900px] bg-black rounded-[52px] p-3.5 shadow-[0_25px_70px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.1)_inset] flex flex-col overflow-hidden border-4 border-slate-800">
+      <div className="relative w-full max-w-[400px] h-[86vh] max-h-[860px] bg-black rounded-[52px] p-3 shadow-[0_25px_70px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.15)_inset] flex flex-col overflow-hidden border-4 border-slate-800">
         
         {/* Phone Glass Inner Screen */}
         <div className="relative w-full h-full bg-white rounded-[40px] overflow-hidden flex flex-col">
           
           {/* Status Bar */}
-          <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-md px-6 pt-2 pb-1.5 flex items-center justify-between text-xs font-semibold text-gray-900 select-none">
+          <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md px-6 pt-2 pb-1.5 flex items-center justify-between text-xs font-semibold text-gray-900 select-none border-b border-gray-100/50">
             <span>9:41</span>
 
             {/* Dynamic Island */}

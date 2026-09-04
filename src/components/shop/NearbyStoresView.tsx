@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NearbyStore } from '../../types/store';
 import { apiService } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
+import { useViewMode } from '../../context/ViewModeContext';
 import confetti from 'canvas-confetti';
 import {
   Search,
@@ -19,6 +20,7 @@ import {
 } from 'lucide-react';
 
 export const NearbyStoresView: React.FC = () => {
+  const { isMobileView } = useViewMode();
   const [stores, setStores] = useState<NearbyStore[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -91,18 +93,24 @@ export const NearbyStoresView: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3.5">
+    <div className={`flex flex-col ${isMobileView ? 'gap-3' : 'gap-5'}`}>
       {/* Search & Location Bar */}
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2.5 items-center">
         {/* Search Bar */}
-        <div className="flex-1 relative flex items-center gap-2 h-[46px] rounded-full border border-gray-200/90 bg-white px-4 shadow-[0_2px_8px_rgba(20,14,50,0.04)]">
-          <Search className="h-[17px] w-[17px] text-gray-400 shrink-0" />
+        <div
+          className={`flex-1 relative flex items-center gap-2.5 ${
+            isMobileView ? 'h-[42px] px-3.5' : 'h-[52px] px-5 rounded-2xl'
+          } rounded-full border border-gray-200/90 bg-white shadow-[0_2px_8px_rgba(20,14,50,0.04)]`}
+        >
+          <Search className={`${isMobileView ? 'h-4 w-4' : 'h-5 w-5'} text-gray-400 shrink-0`} />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search stores, brands, malls..."
-            className="flex-1 bg-transparent border-0 outline-none text-[13.5px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium"
+            className={`flex-1 bg-transparent border-0 outline-none ${
+              isMobileView ? 'text-xs' : 'text-base'
+            } text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium`}
           />
           {searchQuery && (
             <button
@@ -119,34 +127,50 @@ export const NearbyStoresView: React.FC = () => {
         <button
           type="button"
           onClick={() => setShowLocationDrawer(true)}
-          className="flex items-center gap-1 shrink-0 rounded-full border border-[#dcd2ff] bg-white px-3 py-2.5 text-[12px] font-semibold text-[#5f2fd1] shadow-sm hover:bg-[#f7f3ff] transition-colors"
+          className={`flex items-center gap-1 shrink-0 ${
+            isMobileView ? 'rounded-full px-3 py-2 text-xs' : 'rounded-2xl px-4 py-3 text-sm'
+          } border border-[#dcd2ff] bg-white font-bold text-[#5f2fd1] shadow-sm hover:bg-[#f7f3ff] transition-colors cursor-pointer`}
         >
-          <Navigation className="h-3.5 w-3.5" />
-          <span className="max-w-[110px] truncate">{selectedArea}</span>
+          <Navigation className={isMobileView ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
+          <span className="max-w-[130px] truncate">{selectedArea}</span>
           <ChevronDown className="h-3 w-3" />
         </button>
       </div>
 
       {/* Value Prop Banner */}
-      <div className="flex items-center justify-between rounded-2xl bg-gradient-to-r from-emerald-50 via-[#f0fdf4] to-emerald-50 p-3 border border-emerald-200/60">
+      <div
+        className={`flex items-center justify-between rounded-2xl bg-gradient-to-r from-emerald-50 via-[#f0fdf4] to-emerald-50 ${
+          isMobileView ? 'p-3' : 'p-4'
+        } border border-emerald-200/60`}
+      >
         <div className="flex items-center gap-2">
-          <QrCode className="w-4 h-4 text-emerald-600" />
-          <span className="text-xs font-bold text-gray-900">
+          <QrCode className={`${isMobileView ? 'w-4 h-4' : 'w-5 h-5'} text-emerald-600`} />
+          <span className={`${isMobileView ? 'text-xs' : 'text-sm'} font-bold text-gray-900`}>
             Offline Store Checkout (Scan & Pay)
           </span>
         </div>
-        <span className="text-[10px] font-bold text-emerald-700 bg-white px-2 py-0.5 rounded-full border border-emerald-200">
+        <span
+          className={`${
+            isMobileView ? 'text-[10px] px-2 py-0.5' : 'text-xs px-3 py-1'
+          } font-bold text-emerald-700 bg-white rounded-full border border-emerald-200`}
+        >
           Instant POS Approval
         </span>
       </div>
 
       {/* Stores List */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          className={
+            isMobileView
+              ? 'grid grid-cols-1 gap-3'
+              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+          }
+        >
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className="h-36 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
+              className={`${isMobileView ? 'h-36' : 'h-48'} rounded-2xl bg-white border border-gray-100 p-4 animate-pulse`}
             />
           ))}
         </div>
@@ -158,16 +182,28 @@ export const NearbyStoresView: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div
+          className={
+            isMobileView
+              ? 'grid grid-cols-1 gap-3'
+              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+          }
+        >
           {stores.map((store) => (
             <div
               key={store.id}
-              className="group rounded-2xl border border-zinc-200/90 bg-white p-4 shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200 space-y-3"
+              className={`group rounded-2xl border border-zinc-200/90 bg-white ${
+                isMobileView ? 'p-3.5 space-y-2.5' : 'p-5 space-y-4'
+              } shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200`}
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-2">
+                  <div
+                    className={`${
+                      isMobileView ? 'h-10 w-10 p-1.5' : 'h-14 w-14 p-2'
+                    } rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0`}
+                  >
                     <img
                       src={store.logo}
                       alt={store.name}
@@ -175,15 +211,25 @@ export const NearbyStoresView: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#712CDC] transition-colors leading-tight">
+                    <h3
+                      className={`${
+                        isMobileView ? 'text-xs' : 'text-base'
+                      } font-bold text-gray-950 group-hover:text-[#712CDC] transition-colors leading-tight`}
+                    >
                       {store.name}
                     </h3>
-                    <p className="text-[11px] text-gray-500 mt-0.5">{store.category}</p>
+                    <p className={`${isMobileView ? 'text-[10px]' : 'text-xs'} text-gray-500 mt-0.5`}>
+                      {store.category}
+                    </p>
                   </div>
                 </div>
 
                 <div className="text-right shrink-0">
-                  <span className="inline-flex items-center gap-0.5 text-xs font-extrabold text-[#712CDC] bg-purple-50 px-2 py-0.5 rounded-full border border-purple-100">
+                  <span
+                    className={`inline-flex items-center gap-0.5 ${
+                      isMobileView ? 'text-[11px] px-2 py-0.5' : 'text-xs px-2.5 py-1'
+                    } font-extrabold text-[#712CDC] bg-purple-50 rounded-full border border-purple-100`}
+                  >
                     <MapPin className="w-3 h-3" />
                     {store.distanceKm} km
                   </span>
@@ -191,15 +237,23 @@ export const NearbyStoresView: React.FC = () => {
               </div>
 
               {/* Address & Status */}
-              <div className="space-y-1 text-xs text-gray-600 bg-gray-50/70 p-2.5 rounded-xl">
-                <p className="text-[11.5px] leading-snug">{store.address}</p>
-                <div className="flex items-center justify-between text-[10.5px] text-gray-500 pt-1">
+              <div
+                className={`space-y-1 ${
+                  isMobileView ? 'text-[11px] p-2' : 'text-xs p-3'
+                } text-gray-600 bg-gray-50/70 rounded-xl`}
+              >
+                <p className="leading-snug">{store.address}</p>
+                <div
+                  className={`flex items-center justify-between ${
+                    isMobileView ? 'text-[10px]' : 'text-[11px]'
+                  } text-gray-500 pt-1`}
+                >
                   <span className="flex items-center gap-1 text-emerald-700 font-semibold">
                     <Clock className="w-3 h-3" /> {store.timing}
                   </span>
                   <a
                     href={`tel:${store.phone}`}
-                    className="flex items-center gap-1 text-[#712CDC] hover:underline"
+                    className="flex items-center gap-1 text-[#712CDC] hover:underline font-semibold"
                   >
                     <Phone className="w-3 h-3" /> Call Store
                   </a>
@@ -208,8 +262,12 @@ export const NearbyStoresView: React.FC = () => {
 
               {/* Footer action */}
               <div className="flex items-center justify-between pt-1">
-                <span className="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> {store.acceptedFinancing}
+                <span
+                  className={`${
+                    isMobileView ? 'text-[10.5px]' : 'text-xs'
+                  } font-bold text-emerald-700 flex items-center gap-1`}
+                >
+                  <Sparkles className="w-3.5 h-3.5" /> {store.acceptedFinancing}
                 </span>
 
                 <button
@@ -218,9 +276,11 @@ export const NearbyStoresView: React.FC = () => {
                     setActiveStore(store);
                     setPaymentResult(null);
                   }}
-                  className="flex items-center gap-1.5 text-xs font-bold text-white bg-[#712CDC] hover:bg-[#6224c2] px-3.5 py-1.5 rounded-xl shadow-xs transition-colors"
+                  className={`flex items-center gap-1.5 font-bold text-white bg-[#712CDC] hover:bg-[#6224c2] ${
+                    isMobileView ? 'text-[11px] px-3 py-1.5 rounded-lg' : 'text-xs px-4 py-2 rounded-xl'
+                  } shadow-xs transition-colors cursor-pointer`}
                 >
-                  <QrCode className="w-3.5 h-3.5" />
+                  <QrCode className={isMobileView ? 'w-3 h-3' : 'w-3.5 h-3.5'} />
                   <span>Pay at Counter</span>
                 </button>
               </div>

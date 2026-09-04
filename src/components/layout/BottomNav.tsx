@@ -7,6 +7,8 @@ import {
   User,
 } from 'lucide-react';
 
+import { useViewMode } from '../../context/ViewModeContext';
+
 export type NavTab = 'home' | 'shop' | 'emi-dues' | 'limit' | 'profile';
 
 interface BottomNavProps {
@@ -15,6 +17,12 @@ interface BottomNavProps {
 }
 
 export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
+  const { isMobileView } = useViewMode();
+
+  if (!isMobileView) {
+    return null;
+  }
+
   const tabs = [
     { id: 'home' as NavTab, label: 'Home', icon: House },
     { id: 'shop' as NavTab, label: 'Shop', icon: Store },
@@ -24,8 +32,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
   ];
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pointer-events-none md:hidden">
-      <div className="mx-auto flex max-w-[500px] items-stretch rounded-[28px] bg-white border border-gray-200/70 px-1.5 py-1.5 shadow-[0_8px_32px_rgba(20,14,50,0.12),0_0_0_1px_rgba(255,255,255,0.18)_inset] pointer-events-auto backdrop-blur-md">
+    <nav className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pointer-events-none">
+      <div className="mx-auto flex max-w-[440px] items-stretch rounded-[28px] bg-white border border-gray-200/70 px-1.5 py-1.5 shadow-[0_8px_32px_rgba(20,14,50,0.12),0_0_0_1px_rgba(255,255,255,0.18)_inset] pointer-events-auto backdrop-blur-md">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;

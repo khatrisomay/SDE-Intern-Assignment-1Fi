@@ -3,6 +3,7 @@ import { Product, ProductVariant } from '../../types/product';
 import { EMIPlan, PledgedFund, CheckoutOrder } from '../../types/emi';
 import { apiService } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
+import { useViewMode } from '../../context/ViewModeContext';
 import confetti from 'canvas-confetti';
 import {
   X,
@@ -33,6 +34,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 }) => {
   if (!orderPayload) return null;
 
+  const { isMobileView } = useViewMode();
   const { product, variant, emiPlan, downPayment } = orderPayload;
 
   // Checkout steps: 1: Summary, 2: Pledge MF, 3: Success
@@ -89,14 +91,25 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-2 sm:p-6 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-[480px] sm:max-w-xl md:max-w-2xl bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]">
-        
+    <div
+      className={`fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center ${
+        isMobileView ? 'p-2' : 'p-6'
+      } animate-in fade-in duration-200`}
+    >
+      <div
+        className={`relative w-full ${
+          isMobileView ? 'max-w-[440px] rounded-3xl' : 'max-w-2xl rounded-[32px]'
+        } bg-white overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]`}
+      >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white sticky top-0 z-10">
+        <div
+          className={`flex items-center justify-between ${
+            isMobileView ? 'px-4 py-3.5' : 'px-6 py-4'
+          } border-b border-gray-100 bg-white sticky top-0 z-10`}
+        >
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-[#712CDC]" />
-            <h2 className="text-sm font-bold text-gray-900">
+            <h2 className={`${isMobileView ? 'text-xs' : 'text-base'} font-bold text-gray-900`}>
               {currentStep === 1 && 'Review Order & EMI Plan'}
               {currentStep === 2 && 'Pledge Mutual Funds'}
               {currentStep === 3 && 'Order Confirmed!'}
@@ -107,10 +120,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+              className="p-1.5 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors cursor-pointer"
               aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className={isMobileView ? 'w-4 h-4' : 'w-5 h-5'} />
             </button>
           )}
         </div>

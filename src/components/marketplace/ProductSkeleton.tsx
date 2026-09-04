@@ -1,15 +1,30 @@
 import React from 'react';
+import { useViewMode } from '../../context/ViewModeContext';
 
 export const ProductSkeleton: React.FC = () => {
+  const { isMobileView } = useViewMode();
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+    <div
+      className={
+        isMobileView
+          ? 'grid grid-cols-1 gap-2.5'
+          : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
+      }
+    >
       {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
         <div
           key={i}
-          className="flex sm:flex-col animate-pulse gap-3.5 rounded-[22px] border border-zinc-200/80 bg-white p-4 shadow-[0_2px_8px_rgba(20,14,50,0.03)]"
+          className={`flex ${
+            isMobileView ? 'flex-row p-3 gap-3' : 'flex-col p-5 gap-4'
+          } animate-pulse rounded-2xl border border-zinc-200/80 bg-white shadow-xs`}
         >
           {/* Product image placeholder */}
-          <div className="h-24 w-24 sm:h-44 sm:w-full shrink-0 rounded-2xl bg-zinc-100 animate-fi-shimmer" />
+          <div
+            className={`${
+              isMobileView ? 'h-20 w-20' : 'h-52 w-full'
+            } shrink-0 rounded-xl bg-zinc-100 animate-fi-shimmer`}
+          />
 
           {/* Details placeholder */}
           <div className="min-w-0 flex-1 py-1 flex flex-col justify-between">

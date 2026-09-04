@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TopBrand } from '../../types/store';
 import { apiService } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
+import { useViewMode } from '../../context/ViewModeContext';
 import confetti from 'canvas-confetti';
 import {
   Search,
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 export const TopBrandsView: React.FC = () => {
+  const { isMobileView } = useViewMode();
   const [brands, setBrands] = useState<TopBrand[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -64,16 +66,22 @@ export const TopBrandsView: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col gap-3.5">
+    <div className={`flex flex-col ${isMobileView ? 'gap-3' : 'gap-5'}`}>
       {/* Search Bar */}
-      <div className="relative flex items-center gap-2.5 h-[46px] rounded-full border border-gray-200/90 bg-white px-4 shadow-[0_2px_8px_rgba(20,14,50,0.04)]">
-        <Search className="h-[17px] w-[17px] text-gray-400 shrink-0" />
+      <div
+        className={`relative flex items-center gap-2.5 ${
+          isMobileView ? 'h-[42px] px-3.5' : 'h-[52px] px-5 rounded-2xl'
+        } rounded-full border border-gray-200/90 bg-white shadow-[0_2px_8px_rgba(20,14,50,0.04)]`}
+      >
+        <Search className={`${isMobileView ? 'h-4 w-4' : 'h-5 w-5'} text-gray-400 shrink-0`} />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search Apple, Samsung, Croma, boAt..."
-          className="flex-1 bg-transparent border-0 outline-none text-[13.5px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium"
+          className={`flex-1 bg-transparent border-0 outline-none ${
+            isMobileView ? 'text-xs' : 'text-base'
+          } text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium`}
         />
         {searchQuery && (
           <button
@@ -93,7 +101,9 @@ export const TopBrandsView: React.FC = () => {
             key={cat.id}
             type="button"
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all shrink-0 ${
+            className={`rounded-full font-bold tracking-tight transition-all shrink-0 cursor-pointer ${
+              isMobileView ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+            } ${
               selectedCategory === cat.id
                 ? 'bg-[#712CDC] text-white shadow-xs'
                 : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
@@ -105,25 +115,39 @@ export const TopBrandsView: React.FC = () => {
       </div>
 
       {/* Value Prop Banner */}
-      <div className="flex items-center justify-between rounded-2xl bg-gradient-to-r from-purple-50 via-[#fbf8ff] to-purple-50 p-3 border border-purple-100/80">
+      <div
+        className={`flex items-center justify-between rounded-2xl bg-gradient-to-r from-purple-50 via-[#fbf8ff] to-purple-50 ${
+          isMobileView ? 'p-3' : 'p-4'
+        } border border-purple-100/80`}
+      >
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-[#712CDC]" />
-          <span className="text-xs font-bold text-gray-900">
+          <Sparkles className={`${isMobileView ? 'w-4 h-4' : 'w-5 h-5'} text-[#712CDC]`} />
+          <span className={`${isMobileView ? 'text-xs' : 'text-sm'} font-bold text-gray-900`}>
             D2C & Online Brand Financing
           </span>
         </div>
-        <span className="text-[10px] font-bold text-[#712CDC] uppercase bg-white px-2 py-0.5 rounded-full border border-purple-100">
+        <span
+          className={`${
+            isMobileView ? 'text-[10px] px-2 py-0.5' : 'text-xs px-3 py-1'
+          } font-bold text-[#712CDC] uppercase bg-white rounded-full border border-purple-100`}
+        >
           0% Interest Card
         </span>
       </div>
 
       {/* Brands List */}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div
+          className={
+            isMobileView
+              ? 'grid grid-cols-1 gap-3'
+              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'
+          }
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div
               key={i}
-              className="h-36 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
+              className={`${isMobileView ? 'h-32' : 'h-40'} rounded-2xl bg-white border border-gray-100 p-4 animate-pulse`}
             />
           ))}
         </div>
@@ -133,16 +157,28 @@ export const TopBrandsView: React.FC = () => {
           <p className="text-xs text-gray-500 mt-1">Try searching for a different brand name.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div
+          className={
+            isMobileView
+              ? 'grid grid-cols-1 gap-3'
+              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'
+          }
+        >
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className="group rounded-2xl border border-zinc-200/90 bg-white p-4 shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200 flex flex-col justify-between"
+              className={`group rounded-2xl border border-zinc-200/90 bg-white ${
+                isMobileView ? 'p-3.5 gap-2.5' : 'p-5 gap-3.5'
+              } shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200 flex flex-col justify-between`}
             >
               {/* Header row */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-11 w-11 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-2">
+                  <div
+                    className={`${
+                      isMobileView ? 'h-10 w-10 p-1.5' : 'h-14 w-14 p-2'
+                    } rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0`}
+                  >
                     <img
                       src={brand.logo}
                       alt={brand.name}
@@ -150,10 +186,18 @@ export const TopBrandsView: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-gray-950 group-hover:text-[#712CDC] transition-colors">
+                    <h3
+                      className={`${
+                        isMobileView ? 'text-xs' : 'text-base'
+                      } font-bold text-gray-950 group-hover:text-[#712CDC] transition-colors leading-tight`}
+                    >
                       {brand.name}
                     </h3>
-                    <span className="text-[10.5px] uppercase font-bold text-gray-400 tracking-wider">
+                    <span
+                      className={`${
+                        isMobileView ? 'text-[9.5px]' : 'text-xs'
+                      } uppercase font-bold text-gray-400 tracking-wider`}
+                    >
                       {brand.category}
                     </span>
                   </div>
@@ -165,36 +209,44 @@ export const TopBrandsView: React.FC = () => {
                     setActiveBrand(brand);
                     setGeneratedCard(null);
                   }}
-                  className="flex items-center gap-1 text-xs font-bold text-[#712CDC] bg-purple-50 hover:bg-purple-100 border border-purple-100 px-3 py-1.5 rounded-xl transition-colors"
+                  className={`flex items-center gap-1 font-bold text-[#712CDC] bg-purple-50 hover:bg-purple-100 border border-purple-100 ${
+                    isMobileView ? 'px-2.5 py-1.5 text-[11px] rounded-lg' : 'px-3.5 py-2 text-xs rounded-xl'
+                  } transition-colors cursor-pointer shrink-0`}
                 >
-                  <CreditCard className="w-3.5 h-3.5" />
+                  <CreditCard className={isMobileView ? 'w-3 h-3' : 'w-3.5 h-3.5'} />
                   <span>Shop with 1Fi</span>
                 </button>
               </div>
 
               {/* Offer strip */}
-              <div className="mt-3 flex items-center gap-1.5 text-xs text-emerald-800 bg-emerald-50/80 rounded-xl px-2.5 py-1.5 border border-emerald-100/60">
-                <Tag className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span className="font-semibold text-[11.5px] leading-tight">
-                  {brand.cashbackOffer}
-                </span>
+              <div
+                className={`flex items-center gap-1.5 text-emerald-800 bg-emerald-50/80 rounded-xl ${
+                  isMobileView ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-2 text-xs'
+                } border border-emerald-100/60`}
+              >
+                <Tag className={`${isMobileView ? 'w-3 h-3' : 'w-3.5 h-3.5'} text-emerald-600 shrink-0`} />
+                <span className="font-semibold leading-tight">{brand.cashbackOffer}</span>
               </div>
 
               {/* Popular tags & features */}
-              <div className="mt-2.5 flex items-center justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-50">
+              <div
+                className={`flex items-center justify-between ${
+                  isMobileView ? 'text-[10px] pt-2' : 'text-xs pt-3'
+                } text-gray-500 border-t border-gray-50`}
+              >
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[10px] text-gray-400 font-medium">Popular:</span>
-                  {brand.popularItems.slice(0, 3).map((item, idx) => (
+                  <span className="text-gray-400 font-medium">Popular:</span>
+                  {brand.popularItems.slice(0, isMobileView ? 2 : 3).map((item, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-700 text-[10px] font-medium"
+                      className="px-1.5 py-0.5 rounded bg-gray-100 text-gray-700 font-medium"
                     >
                       {item}
                     </span>
                   ))}
                 </div>
 
-                <span className="text-[#712CDC] font-bold text-[10.5px] shrink-0 flex items-center gap-0.5">
+                <span className="text-[#712CDC] font-bold shrink-0 flex items-center gap-0.5">
                   <Zap className="w-3 h-3 fill-current" /> {brand.maxNoCostTenure}M 0% EMI
                 </span>
               </div>

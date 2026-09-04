@@ -14,6 +14,8 @@ interface ProductGridProps {
   hasActiveFilters: boolean;
 }
 
+import { useViewMode } from '../../context/ViewModeContext';
+
 export const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   loading,
@@ -23,6 +25,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   onResetFilters,
   hasActiveFilters,
 }) => {
+  const { isMobileView } = useViewMode();
+
   if (loading) {
     return <ProductSkeleton />;
   }
@@ -72,14 +76,14 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center justify-between px-1 text-xs text-gray-500">
-        <span className="font-semibold text-gray-700">
+      <div className={`flex items-center justify-between px-1 ${isMobileView ? 'text-[11px]' : 'text-sm'} text-gray-500 font-medium`}>
+        <span className="font-bold text-gray-800">
           Showing {products.length} {products.length === 1 ? 'Product' : 'Products'}
         </span>
-        <span>0% Interest with Mutual Funds</span>
+        <span className="text-[#712CDC] font-semibold">0% Interest backed by Mutual Funds</span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+      <div className={isMobileView ? 'grid grid-cols-1 gap-2.5' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'}>
         {products.map((product) => (
           <ProductCard
             key={product.id}
