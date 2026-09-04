@@ -56,6 +56,12 @@ While the initial assignment specified that *Top Brands* and *Nearby Stores* cou
 - **Mobile View**: On mobile devices (`< 768px`), the interface smoothly adapts to the authentic 1Fi mobile app layout, featuring floating bottom navigation with purple radial glow, compact touch cards, and native mobile gestures.
 - **Phone Simulator Toggle**: Click *"Phone Simulator"* in the header on desktop to preview the mobile app experience within an interactive iPhone 16 mockup frame.
 
+### 7. Official 1Fi Landing Home Page
+- **Exact Match to 1fi.in Hero**: Features the official headline *"Shop today / Pay later using / mutual funds."*, interactive *"Check Eligibility ↗"* and *"Start Shopping 🔍"* buttons, and investment value captions.
+- **3-Column Curated Product Showcase**: Features *Featured Products* (Google Pixel 10 & iPhone 17), *Best Sellers* (iPhone 17 Pro Max & Galaxy S25 Ultra), and *Best Deals* (MacBook Pro & OnePlus 15) in 1Fi signature soft lavender cards (`#EFDAFF`) with instant navigation to Marketplace.
+- **Interactive Credit Limit Estimator Modal**: Interactive slider calculating instant 80% LTV credit limits, monthly 0% purchasing power, and ~14% CAGR compounding returns.
+- **"How It Works in 4 Steps" & "Key Benefits"**: Complete overview of 1Fi's institutional security, 0% interest, and instant digital lien approval process.
+
 ---
 
 ## 🛠️ Architecture & Tech Stack
