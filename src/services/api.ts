@@ -1,6 +1,7 @@
 ﻿import { Product, CategoryFilter, SortOption } from '../types/product';
 import { EMIPlan, PledgedFund, CheckoutOrder } from '../types/emi';
-import { MOCK_PRODUCTS, MOCK_USER_PORTFOLIO } from './mockData';
+import { TopBrand, NearbyStore } from '../types/store';
+import { MOCK_PRODUCTS, MOCK_USER_PORTFOLIO, MOCK_TOP_BRANDS, MOCK_NEARBY_STORES } from './mockData';
 import { calculateEMIDetails } from '../utils/formatters';
 
 // Simulated delay helper
@@ -78,6 +79,55 @@ export const apiService = {
       throw new Error(`Product not found: ${idOrSlug}`);
     }
     return product;
+  },
+
+  /**
+   * Fetch online partner brands (Top Brands tab)
+   */
+  async getTopBrands(query?: string, category?: string): Promise<TopBrand[]> {
+    await delay(250);
+    let results = [...MOCK_TOP_BRANDS];
+
+    if (category && category !== 'all') {
+      results = results.filter((b) => b.category === category);
+    }
+
+    if (query && query.trim()) {
+      const q = query.toLowerCase().trim();
+      results = results.filter(
+        (b) =>
+          b.name.toLowerCase().includes(q) ||
+          b.cashbackOffer.toLowerCase().includes(q) ||
+          b.popularItems.some((item) => item.toLowerCase().includes(q))
+      );
+    }
+
+    return results;
+  },
+
+  /**
+   * Fetch nearby retail partner stores (Nearby Stores tab)
+   */
+  async getNearbyStores(params?: { query?: string; pincode?: string }): Promise<NearbyStore[]> {
+    await delay(300);
+    let results = [...MOCK_NEARBY_STORES];
+
+    if (params?.pincode && params.pincode.trim()) {
+      results = results.filter((s) => s.pincode.includes(params.pincode!.trim()));
+    }
+
+    if (params?.query && params.query.trim()) {
+      const q = params.query.toLowerCase().trim();
+      results = results.filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.brand.toLowerCase().includes(q) ||
+          s.address.toLowerCase().includes(q) ||
+          s.category.toLowerCase().includes(q)
+      );
+    }
+
+    return results;
   },
 
   /**
@@ -163,5 +213,36 @@ export const apiService = {
     };
 
     return order;
+  },
+
+  /**
+   * Generate instant 1Fi virtual card / voucher for brand online checkout
+   */
+  async generateBrandVoucher(brandId: string, creditAmount: number) {
+    await delay(600);
+    const brand = MOCK_TOP_BRANDS.find((b) => b.id === brandId);
+    return {
+      voucherCode: `1FI-${brand?.name.toUpperCase().slice(0, 4) || 'CARD'}-${Math.floor(1000 + Math.random() * 9000)}`,
+      validTill: 'Valid for 30 Days',
+      maxLimit: creditAmount,
+      tenure: '0% EMI up to 12 Months',
+    };
+  },
+
+  /**
+   * Process in-store retail counter QR payment via 1Fi mutual fund pledge
+   */
+  async processInStorePayment(storeId: string, amount: number, tenureMonths: number) {
+    await delay(800);
+    const store = MOCK_NEARBY_STORES.find((s) => s.id === storeId);
+    return {
+      transactionId: `1FI-POS-${Math.floor(100000 + Math.random() * 900000)}`,
+      merchantName: store?.name || 'Retail Partner',
+      amount,
+      monthlyEMI: Math.round(amount / tenureMonths),
+      tenureMonths,
+      status: 'approved',
+      qrReference: `1FI-IN-STORE-${Date.now()}`,
+    };
   },
 };

@@ -1,4 +1,4 @@
-﻿# 1Fi SDE Intern Assignment: 1Fi Marketplace
+# 1Fi SDE Intern Assignment: 1Fi Marketplace
 
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
@@ -20,11 +20,11 @@ This repository implements the **1Fi Marketplace** section within the **Shop** e
 
 ## 🚀 Key Features
 
-### 1. Shop Page Navigation (3 Options)
-Per assignment requirements, the Shop page features a segmented 3-tab pill switcher:
-- **Top Brands**: Clean, styled coming-soon placeholder (no implementation required).
-- **Nearby Stores**: Clean, styled location placeholder (no implementation required).
-- **1Fi Marketplace**: **Fully designed and implemented flagship experience** with product catalog, search, filtering, and checkout.
+### 1. Shop Page Navigation (All 3 Options Fully Functional!)
+While the initial assignment specified that *Top Brands* and *Nearby Stores* could remain blank placeholders, **all three options have been fully designed and implemented** to deliver a standout, comprehensive shopping experience:
+- **Top Brands (D2C Brand Portal)**: Browse official brand partners (Apple, Samsung, Croma, Reliance Digital, boAt, OnePlus, Sony, Dyson) with brand offers, instant 1Fi Virtual Card limit allocation, and direct voucher redemption.
+- **Nearby Stores (Offline Retail & In-Store POS)**: Interactive store finder with GPS geolocation / pincode search, real-time operating hours, directions, and an instant in-store counter checkout modal generating dynamic merchant authorization QR codes.
+- **1Fi Marketplace (Flagship eCommerce Experience)**: Complete online marketplace with comprehensive product catalog, variant selectors, multi-tenure EMI calculations with mutual fund compounding savings, and simulated CAMS/KFintech lien pledge checkout.
 
 ### 2. 1Fi Marketplace Catalog
 - **Instant Search**: Real-time search across product names, brands, and categories.
@@ -62,9 +62,10 @@ Per assignment requirements, the Shop page features a segmented 3-tab pill switc
 src/
 ├── types/
 │   ├── product.ts          # Strongly typed product & variant models
-│   └── emi.ts              # Strongly typed EMI plans, pledges & orders
+│   ├── emi.ts              # Strongly typed EMI plans, pledges & orders
+│   └── store.ts            # Top brand partner & nearby store models
 ├── services/
-│   ├── mockData.ts         # Catalog data (Apple, Samsung, Google, Sony, OnePlus)
+│   ├── mockData.ts         # Catalog, Top Brands, and Nearby Store partners data
 │   └── api.ts              # Decoupled async API layer with latency simulation
 ├── hooks/
 │   ├── useProducts.ts      # Search, filter, sorting, loading & error state management
@@ -75,10 +76,10 @@ src/
 │   │   ├── BottomNav.tsx   # Floating bottom navigation with 1Fi purple glow
 │   │   └── DeviceFrame.tsx # Mobile phone simulator container
 │   ├── shop/
-│   │   ├── ShopTabs.tsx    # 3-tab segmented control
-│   │   ├── TopBrandsPlaceholder.tsx    # Clean placeholder per assignment
-│   │   ├── NearbyStoresPlaceholder.tsx # Clean placeholder per assignment
-│   │   └── ShopPage.tsx    # Main Shop experience
+│   │   ├── ShopTabs.tsx         # 3-tab segmented control
+│   │   ├── TopBrandsView.tsx    # D2C brands & 1Fi Instant Virtual Card generator
+│   │   ├── NearbyStoresView.tsx # Local retail partner finder & in-store POS QR checkout
+│   │   └── ShopPage.tsx         # Main Shop coordinator component
 │   ├── marketplace/
 │   │   ├── SearchBar.tsx
 │   │   ├── CategoryFilters.tsx

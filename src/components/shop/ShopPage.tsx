@@ -1,7 +1,7 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { ShopTabs, ShopOption } from './ShopTabs';
-import { TopBrandsPlaceholder } from './TopBrandsPlaceholder';
-import { NearbyStoresPlaceholder } from './NearbyStoresPlaceholder';
+import { TopBrandsView } from './TopBrandsView';
+import { NearbyStoresView } from './NearbyStoresView';
 import { SearchBar } from '../marketplace/SearchBar';
 import { CategoryFilters } from '../marketplace/CategoryFilters';
 import { ProductGrid } from '../marketplace/ProductGrid';
@@ -101,17 +101,17 @@ export const ShopPage: React.FC = () => {
         <ShopTabs activeOption={shopOption} onChange={setShopOption} />
       </div>
 
-      {/* TAB 1: Top Brands Placeholder */}
+      {/* TAB 1: Top Brands (Fully Functional Experience) */}
       {shopOption === 'top-brands' && (
         <div className="px-4">
-          <TopBrandsPlaceholder />
+          <TopBrandsView />
         </div>
       )}
 
-      {/* TAB 2: Nearby Stores Placeholder */}
+      {/* TAB 2: Nearby Stores (Fully Functional Experience) */}
       {shopOption === 'nearby-stores' && (
         <div className="px-4">
-          <NearbyStoresPlaceholder />
+          <NearbyStoresView />
         </div>
       )}
 
