@@ -1,10 +1,10 @@
 # 1Fi SDE Intern Assignment: 1Fi Marketplace
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Render_Hosted-712CDC?style=for-the-badge&logo=render&logoColor=white)](https://1fi-marketplace.onrender.com)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Render_Hosted-712CDC?style=for-the-badge&logo=render&logoColor=white)](https://onefi-marketplace-so5y.onrender.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi)
 [![Status](https://img.shields.io/badge/Deployment-Live-success.svg?style=for-the-badge)]()
 
-> 🌐 **Live Hosted Web Application**: **[https://1fi-marketplace.onrender.com](https://1fi-marketplace.onrender.com)**  
+> 🌐 **Live Hosted Web Application**: **[https://onefi-marketplace-so5y.onrender.com/](https://onefi-marketplace-so5y.onrender.com/)**  
 > 🔗 **GitHub Repository**: **[https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi](https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi)**  
 > 📱 **Phone Simulator**: Built-in interactive mobile toggle available directly inside the app header!
 
@@ -141,6 +141,8 @@ src/
 ---
 
 ## 🚀 Deployment on Render
+
+> 🌐 **Live Production URL**: **[https://onefi-marketplace-so5y.onrender.com/](https://onefi-marketplace-so5y.onrender.com/)**
 
 This project includes a native `render.yaml` Blueprint specification for 1-click deployment on [Render](https://render.com).
 
