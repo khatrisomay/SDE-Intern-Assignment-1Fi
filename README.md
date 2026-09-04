@@ -51,8 +51,10 @@ While the initial assignment specified that *Top Brands* and *Nearby Stores* cou
 - **Step 2 - Digital Lien Pledge Simulation**: Verified mutual fund portfolio selection (CAMS / KFintech) with 256-bit encryption guarantee.
 - **Step 3 - Celebratory Confirmation**: Confetti celebration, official Order ID (`1FI-ORD-XXXXXX`), pledge reference, and monthly repayment calendar.
 
-### 6. Realistic Mobile Device Simulator
-- **Dual-View Toggle**: Click the *"Phone Frame / Full View"* toggle button in the top-right header to switch between an interactive iPhone 16 mockup frame (with dynamic island and status bar) and a standard responsive view.
+### 6. Full-Screen Responsive Web App & Mobile App Experience
+- **Laptop / Web Window**: The app covers the full width of the screen (`max-w-7xl mx-auto`), featuring top desktop navigation bar (`Home`, `Shop`, `EMI Dues`, `Limit`, `Profile`), 4-column product grid (`lg:grid-cols-4`), 3-4 column brand/store grids, rich split hero banner with live portfolio credit line statistics, and an expansive 2-column desktop product detail modal (`md:grid-cols-12`).
+- **Mobile View**: On mobile devices (`< 768px`), the interface smoothly adapts to the authentic 1Fi mobile app layout, featuring floating bottom navigation with purple radial glow, compact touch cards, and native mobile gestures.
+- **Phone Simulator Toggle**: Click *"Phone Simulator"* in the header on desktop to preview the mobile app experience within an interactive iPhone 16 mockup frame.
 
 ---
 
