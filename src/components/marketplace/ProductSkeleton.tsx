@@ -1,0 +1,31 @@
+﻿import React from 'react';
+
+export const ProductSkeleton: React.FC = () => {
+  return (
+    <div className="flex flex-col gap-3">
+      {[1, 2, 3, 4].map((i) => (
+        <div
+          key={i}
+          className="flex animate-pulse gap-3.5 rounded-[20px] border border-zinc-200/80 bg-white p-4 shadow-[0_2px_8px_rgba(20,14,50,0.03)]"
+        >
+          {/* Product image placeholder */}
+          <div className="h-24 w-24 shrink-0 rounded-2xl bg-zinc-100 animate-fi-shimmer" />
+
+          {/* Details placeholder */}
+          <div className="min-w-0 flex-1 py-1 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="h-3 w-16 rounded bg-purple-100 animate-fi-shimmer" />
+              <div className="h-4 w-4/5 rounded bg-zinc-200 animate-fi-shimmer" />
+              <div className="h-3 w-3/5 rounded bg-zinc-100 animate-fi-shimmer" />
+            </div>
+
+            <div className="mt-3 flex items-center justify-between pt-1 border-t border-gray-50">
+              <div className="h-4 w-20 rounded bg-zinc-200 animate-fi-shimmer" />
+              <div className="h-5 w-24 rounded-full bg-purple-100/60 animate-fi-shimmer" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
