@@ -149,9 +149,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToShop }) => {
       {/* ================= HERO SECTION ================= */}
       <section className="relative overflow-hidden pt-6 sm:pt-10 lg:pt-16 pb-12 sm:pb-16 bg-gradient-to-b from-[#f7f2ff] via-[#fbf8ff] to-white">
         {/* Subtle background glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-purple-200/30 to-transparent blur-3xl pointer-events-none -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1600px] h-96 bg-gradient-to-b from-purple-200/30 to-transparent blur-3xl pointer-events-none -z-10" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <div className="w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 text-center">
           {/* Top Pill */}
           <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-200/80 bg-white/80 backdrop-blur-xs px-1 py-1 shadow-xs mb-6">
             <span className="flex items-center gap-1 rounded-full bg-[#712CDC] text-white px-2.5 py-0.5 text-[11px] font-bold shadow-xs">
@@ -262,7 +262,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToShop }) => {
       </section>
 
       {/* ================= HOW IT WORKS SECTION ================= */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-gray-100">
+      <section className="py-14 sm:py-20 w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 border-t border-gray-100">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14">
           <div>
             <div className="inline-block rounded-full border border-gray-300 px-3.5 py-1 text-xs font-semibold text-gray-800 bg-gray-50 mb-3">
@@ -310,8 +310,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToShop }) => {
       </section>
 
       {/* ================= KEY ADVANTAGES SECTION ================= */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6 bg-[#faf8ff] border-y border-purple-100/60">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-14 sm:py-20 bg-[#faf8ff] border-y border-purple-100/60">
+        <div className="w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14">
             <div>
               <div className="inline-block rounded-full border border-purple-200 px-3.5 py-1 text-xs font-semibold text-[#712CDC] bg-purple-50 mb-3">

@@ -71,8 +71,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   // ================= DESKTOP WEB HEADER =================
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 px-6 lg:px-10 py-4 shadow-xs">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 px-6 sm:px-8 lg:px-12 xl:px-16 py-4 shadow-xs">
+      <div className="w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto flex items-center justify-between">
         {/* Desktop Brand Logo */}
         <div
           onClick={() => onTabChange?.('home')}

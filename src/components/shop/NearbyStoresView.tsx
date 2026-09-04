@@ -99,17 +99,17 @@ export const NearbyStoresView: React.FC = () => {
         {/* Search Bar */}
         <div
           className={`flex-1 relative flex items-center gap-2.5 ${
-            isMobileView ? 'h-[42px] px-3.5' : 'h-[52px] px-5 rounded-2xl'
-          } rounded-full border border-gray-200/90 bg-white shadow-[0_2px_8px_rgba(20,14,50,0.04)]`}
+            isMobileView ? 'h-[42px] px-3.5 rounded-full' : 'h-[60px] px-6 rounded-2xl shadow-sm'
+          } border border-gray-200/90 bg-white`}
         >
-          <Search className={`${isMobileView ? 'h-4 w-4' : 'h-5 w-5'} text-gray-400 shrink-0`} />
+          <Search className={`${isMobileView ? 'h-4 w-4' : 'h-6 w-6'} text-gray-400 shrink-0`} />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search stores, brands, malls..."
             className={`flex-1 bg-transparent border-0 outline-none ${
-              isMobileView ? 'text-xs' : 'text-base'
+              isMobileView ? 'text-xs' : 'text-base lg:text-lg'
             } text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium`}
           />
           {searchQuery && (
@@ -186,14 +186,14 @@ export const NearbyStoresView: React.FC = () => {
           className={
             isMobileView
               ? 'grid grid-cols-1 gap-3'
-              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
           }
         >
           {stores.map((store) => (
             <div
               key={store.id}
-              className={`group rounded-2xl border border-zinc-200/90 bg-white ${
-                isMobileView ? 'p-3.5 space-y-2.5' : 'p-5 space-y-4'
+              className={`group rounded-2xl lg:rounded-3xl border border-zinc-200/90 bg-white ${
+                isMobileView ? 'p-3.5 space-y-2.5' : 'p-6 space-y-5'
               } shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200`}
             >
               {/* Header */}

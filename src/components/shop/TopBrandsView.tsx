@@ -70,17 +70,17 @@ export const TopBrandsView: React.FC = () => {
       {/* Search Bar */}
       <div
         className={`relative flex items-center gap-2.5 ${
-          isMobileView ? 'h-[42px] px-3.5' : 'h-[52px] px-5 rounded-2xl'
-        } rounded-full border border-gray-200/90 bg-white shadow-[0_2px_8px_rgba(20,14,50,0.04)]`}
+          isMobileView ? 'h-[42px] px-3.5 rounded-full' : 'h-[60px] px-6 rounded-2xl shadow-sm'
+        } border border-gray-200/90 bg-white`}
       >
-        <Search className={`${isMobileView ? 'h-4 w-4' : 'h-5 w-5'} text-gray-400 shrink-0`} />
+        <Search className={`${isMobileView ? 'h-4 w-4' : 'h-6 w-6'} text-gray-400 shrink-0`} />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search Apple, Samsung, Croma, boAt..."
           className={`flex-1 bg-transparent border-0 outline-none ${
-            isMobileView ? 'text-xs' : 'text-base'
+            isMobileView ? 'text-xs' : 'text-base lg:text-lg'
           } text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium`}
         />
         {searchQuery && (
@@ -141,13 +141,13 @@ export const TopBrandsView: React.FC = () => {
           className={
             isMobileView
               ? 'grid grid-cols-1 gap-3'
-              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'
+              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
           }
         >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div
               key={i}
-              className={`${isMobileView ? 'h-32' : 'h-40'} rounded-2xl bg-white border border-gray-100 p-4 animate-pulse`}
+              className={`${isMobileView ? 'h-32' : 'h-44'} rounded-2xl bg-white border border-gray-100 p-4 animate-pulse`}
             />
           ))}
         </div>
@@ -161,14 +161,14 @@ export const TopBrandsView: React.FC = () => {
           className={
             isMobileView
               ? 'grid grid-cols-1 gap-3'
-              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'
+              : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
           }
         >
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className={`group rounded-2xl border border-zinc-200/90 bg-white ${
-                isMobileView ? 'p-3.5 gap-2.5' : 'p-5 gap-3.5'
+              className={`group rounded-2xl lg:rounded-3xl border border-zinc-200/90 bg-white ${
+                isMobileView ? 'p-3.5 gap-2.5' : 'p-6 gap-4'
               } shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200 flex flex-col justify-between`}
             >
               {/* Header row */}

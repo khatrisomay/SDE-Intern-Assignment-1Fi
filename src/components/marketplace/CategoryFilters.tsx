@@ -45,14 +45,14 @@ export const CategoryFilters: React.FC<CategoryFiltersProps> = ({
             className={`flex items-center transition-all shrink-0 select-none cursor-pointer ${
               isMobileView
                 ? 'gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold'
-                : 'gap-2 px-5 py-2.5 rounded-2xl text-sm font-bold shadow-xs'
+                : 'gap-2.5 px-6 py-3 rounded-2xl text-sm lg:text-base font-bold shadow-xs'
             } ${
               isActive
                 ? 'bg-[#712CDC] text-white shadow-sm shadow-purple-500/30'
                 : 'bg-white border border-gray-200/90 text-gray-700 hover:bg-gray-50 hover:border-gray-300'
             }`}
           >
-            <Icon className={`${isMobileView ? 'w-3.5 h-3.5' : 'w-4 h-4'} ${isActive ? 'text-white' : 'text-gray-400'}`} />
+            <Icon className={`${isMobileView ? 'w-3.5 h-3.5' : 'w-4.5 h-4.5'} ${isActive ? 'text-white' : 'text-gray-400'}`} />
             <span>{cat.label}</span>
           </button>
         );

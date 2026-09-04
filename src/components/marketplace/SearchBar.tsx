@@ -19,11 +19,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div
       className={`relative flex items-center gap-3 border border-gray-200/90 bg-white shadow-xs focus-within:border-[#712CDC] focus-within:ring-4 focus-within:ring-[#712CDC]/10 transition-all ${
-        isMobileView ? 'h-[42px] px-3.5 rounded-full' : 'h-[54px] px-5 rounded-2xl shadow-sm'
+        isMobileView ? 'h-[42px] px-3.5 rounded-full' : 'h-[60px] px-6 rounded-2xl shadow-sm'
       }`}
     >
       <Search
-        className={`${isMobileView ? 'h-4 w-4' : 'h-5 w-5'} text-gray-400 shrink-0`}
+        className={`${isMobileView ? 'h-4 w-4' : 'h-6 w-6'} text-gray-400 shrink-0`}
         strokeWidth={2}
       />
       <input
@@ -33,7 +33,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         placeholder={placeholder}
         aria-label="Search products"
         className={`flex-1 bg-transparent border-0 outline-none text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-0 shadow-none font-medium ${
-          isMobileView ? 'text-xs' : 'text-base'
+          isMobileView ? 'text-xs' : 'text-base lg:text-lg'
         }`}
       />
       {value && (

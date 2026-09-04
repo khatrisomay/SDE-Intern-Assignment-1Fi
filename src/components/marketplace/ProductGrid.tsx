@@ -75,15 +75,15 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className={`flex items-center justify-between px-1 ${isMobileView ? 'text-[11px]' : 'text-sm'} text-gray-500 font-medium`}>
+    <div className="flex flex-col gap-3.5">
+      <div className={`flex items-center justify-between px-1 ${isMobileView ? 'text-[11px]' : 'text-sm lg:text-base'} text-gray-500 font-medium`}>
         <span className="font-bold text-gray-800">
           Showing {products.length} {products.length === 1 ? 'Product' : 'Products'}
         </span>
         <span className="text-[#712CDC] font-semibold">0% Interest backed by Mutual Funds</span>
       </div>
 
-      <div className={isMobileView ? 'grid grid-cols-1 gap-2.5' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'}>
+      <div className={isMobileView ? 'grid grid-cols-1 gap-2.5' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8'}>
         {products.map((product) => (
           <ProductCard
             key={product.id}

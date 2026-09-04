@@ -64,7 +64,7 @@ export const ShopPage: React.FC = () => {
   const hasActiveFilters = category !== 'all' || searchQuery.trim() !== '' || sortBy !== 'recommended';
 
   return (
-    <div className={`relative ${isMobileView ? 'pb-24 px-3' : 'pb-16 max-w-7xl mx-auto px-6 lg:px-10'}`}>
+    <div className={`relative ${isMobileView ? 'pb-24 px-3' : 'pb-20 w-full max-w-[1600px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-16'}`}>
       {/* 1Fi Promotional Hero Banner */}
       {isMobileView ? (
         /* Mobile Hero Banner - Compact & Native */
@@ -95,53 +95,55 @@ export const ShopPage: React.FC = () => {
           </div>
         </section>
       ) : (
-        /* Desktop Hero Banner - Bold & Prominent */
-        <section className="relative overflow-hidden pt-4 pb-6">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-tr from-[#6C28D9] via-[#8232e8] to-[#9e4dfc] text-white p-8 lg:p-10 shadow-xl shadow-purple-900/15 flex items-center justify-between gap-8">
-            <div className="relative z-10 max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1 text-xs font-bold backdrop-blur-md border border-white/20 mb-4 shadow-sm">
+        /* Desktop Hero Banner - Bold, Expansive & High-Impact */
+        <section className="relative overflow-hidden pt-6 pb-8">
+          <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-tr from-[#6C28D9] via-[#8232e8] to-[#9e4dfc] text-white p-8 lg:p-12 xl:p-14 shadow-2xl shadow-purple-900/20 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="max-w-2xl xl:max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-bold backdrop-blur-md border border-white/20 mb-4">
                 <Sparkles className="h-4 w-4 text-amber-300 fill-amber-300" />
                 <span>India's 1st LAMF Shopping Platform</span>
               </div>
 
-              <h2 className="text-3xl lg:text-5xl font-black tracking-tight leading-tight">
-                Shop today, <span className="italic font-light text-purple-200">Pay later</span> <br />
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
+                Shop today, <span className="italic font-light text-purple-200 font-serif">Pay later</span>
+                <br />
                 using <span className="underline decoration-amber-300 underline-offset-4">mutual funds</span>.
               </h2>
 
-              <p className="mt-3 text-base text-purple-100 max-w-xl leading-relaxed">
-                Get 0% interest EMIs on top electronics without liquidating your portfolio. Your investments continue compounding at ~14% CAGR while you shop.
+              <p className="mt-4 text-base lg:text-lg text-purple-100 max-w-xl leading-relaxed">
+                Get 0% interest EMIs on top electronics without liquidating your portfolio.
+                Your investments continue compounding at ~14% CAGR while you shop.
               </p>
 
-              <div className="mt-6 flex items-center gap-3 text-sm font-semibold text-purple-100">
-                <span className="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xs">
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-semibold">
+                <span className="flex items-center gap-1.5 bg-white/15 px-4 py-2 rounded-full backdrop-blur-xs border border-white/20 shadow-xs">
                   <Zap className="w-4 h-4 text-amber-300 fill-amber-300" /> 0% Interest
                 </span>
-                <span className="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xs">
+                <span className="flex items-center gap-1.5 bg-white/15 px-4 py-2 rounded-full backdrop-blur-xs border border-white/20 shadow-xs">
                   <ShieldCheck className="w-4 h-4 text-emerald-300" /> No CIBIL Check
                 </span>
-                <span className="flex items-center gap-2 bg-white/10 px-3.5 py-2 rounded-xl backdrop-blur-xs">
-                  <Sparkles className="w-4 h-4 text-amber-300" /> CAMS & KFintech Verified
+                <span className="flex items-center gap-1.5 bg-white/15 px-4 py-2 rounded-full backdrop-blur-xs border border-white/20 shadow-xs">
+                  <Sparkles className="w-4 h-4 text-purple-200" /> CAMS & KFintech Verified
                 </span>
               </div>
             </div>
 
-            {/* Right Hero Stats Box */}
-            <div className="relative z-10 hidden md:flex flex-col gap-4 min-w-[280px] bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 shadow-lg">
+            {/* Desktop Hero Right Card */}
+            <div className="w-full lg:w-auto bg-white/10 backdrop-blur-md rounded-3xl p-6 lg:p-8 border border-white/20 flex flex-col gap-4 shrink-0 min-w-[320px] lg:min-w-[360px] shadow-xl">
               <div>
-                <span className="text-xs text-purple-200 font-semibold uppercase tracking-wider block">
+                <span className="text-xs uppercase font-bold text-purple-200 tracking-wider">
                   Instant Credit Line
                 </span>
-                <span className="text-3xl font-black text-white mt-1 block">₹3,52,000</span>
+                <p className="text-3xl lg:text-4xl font-black mt-1">₹3,52,000</p>
               </div>
-              <div className="h-px bg-white/20" />
-              <div className="text-sm text-purple-100 space-y-2">
+
+              <div className="space-y-2 text-xs lg:text-sm pt-3 border-t border-white/15">
                 <div className="flex justify-between">
-                  <span className="text-purple-200">MF Holdings:</span>
+                  <span className="text-purple-200 font-medium">MF Holdings:</span>
                   <span className="font-bold text-white">₹4,40,900</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-purple-200">Portfolio Growth:</span>
+                  <span className="text-purple-200 font-medium">Portfolio Growth:</span>
                   <span className="font-bold text-emerald-300">+14% CAGR</span>
                 </div>
               </div>
@@ -151,8 +153,8 @@ export const ShopPage: React.FC = () => {
       )}
 
       {/* 3-Option Shop Tabs Segmented Control */}
-      <div className={`mt-2 mb-4 flex ${isMobileView ? 'justify-center w-full' : 'justify-start w-auto'}`}>
-        <div className={isMobileView ? 'w-full' : 'w-auto'}>
+      <div className="mt-2 mb-6 w-full flex justify-center">
+        <div className={isMobileView ? 'w-full' : 'w-full max-w-3xl lg:max-w-4xl'}>
           <ShopTabs activeOption={shopOption} onChange={setShopOption} />
         </div>
       </div>

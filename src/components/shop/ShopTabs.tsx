@@ -19,11 +19,11 @@ export const ShopTabs: React.FC<ShopTabsProps> = ({ activeOption, onChange }) =>
   ];
 
   return (
-    <div className={`relative z-[2] ${isMobileView ? 'px-0' : 'px-1 max-w-2xl mx-auto'}`}>
+    <div className={`relative z-[2] ${isMobileView ? 'px-0' : 'px-1 max-w-3xl lg:max-w-4xl mx-auto'}`}>
       <div
-        className={`flex gap-1.5 rounded-full border border-[#ece5ff] bg-[#f5f0ff] ${
-          isMobileView ? 'p-1' : 'p-2'
-        } shadow-[0_1px_3px_rgba(113,44,220,0.06)]`}
+        className={`flex gap-2 rounded-full border border-[#ece5ff] bg-[#f5f0ff] ${
+          isMobileView ? 'p-1' : 'p-2 sm:p-2.5'
+        } shadow-[0_2px_8px_rgba(113,44,220,0.08)]`}
         role="tablist"
       >
         {tabs.map((tab) => {
@@ -37,10 +37,10 @@ export const ShopTabs: React.FC<ShopTabsProps> = ({ activeOption, onChange }) =>
               aria-selected={isActive}
               onClick={() => onChange(tab.id)}
               className={`relative flex-1 rounded-full ${
-                isMobileView ? 'py-2 px-1.5 text-[11.5px]' : 'py-3 px-4 text-sm'
-              } font-bold tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer ${
+                isMobileView ? 'py-2 px-1.5 text-[11.5px]' : 'py-3.5 px-6 text-sm lg:text-base'
+              } font-bold tracking-tight transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${
                 isActive
-                  ? 'bg-white text-[#712CDC] shadow-[0_1px_4px_rgba(20,14,50,0.12),0_0_0_1px_rgba(113,44,220,0.10)]'
+                  ? 'bg-white text-[#712CDC] shadow-[0_2px_8px_rgba(20,14,50,0.12),0_0_0_1px_rgba(113,44,220,0.10)] scale-[1.01]'
                   : 'text-gray-500 hover:text-gray-900'
               }`}
             >
@@ -49,21 +49,21 @@ export const ShopTabs: React.FC<ShopTabsProps> = ({ activeOption, onChange }) =>
               {tab.badge && (
                 <span
                   className={`${
-                    isMobileView ? 'text-[8.5px] px-1.5 py-0.5' : 'text-[10px] px-2 py-0.5'
+                    isMobileView ? 'text-[8.5px] px-1.5 py-0.5' : 'text-xs px-2.5 py-0.5'
                   } font-black uppercase rounded-full leading-tight flex items-center gap-0.5 ${
                     isActive
-                      ? 'bg-[#712CDC] text-white'
+                      ? 'bg-[#712CDC] text-white shadow-xs'
                       : 'bg-purple-200 text-purple-800'
                   }`}
                 >
-                  <Sparkles className={isMobileView ? 'w-2 h-2' : 'w-2.5 h-2.5'} />
+                  <Sparkles className={isMobileView ? 'w-2 h-2' : 'w-3 h-3'} />
                   {tab.badge}
                 </span>
               )}
 
               {/* Active Underline Pill */}
               {isActive && (
-                <span className="absolute bottom-1 left-1/2 h-[2.5px] w-6 -translate-x-1/2 rounded-full bg-[#712CDC]" />
+                <span className="absolute bottom-1 left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-[#712CDC]" />
               )}
             </button>
           );

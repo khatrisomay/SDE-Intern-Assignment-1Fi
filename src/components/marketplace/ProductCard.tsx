@@ -100,7 +100,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
   return (
     <div
       onClick={() => onSelect(product)}
-      className="group relative flex flex-col justify-between rounded-3xl border border-gray-200/90 bg-white p-6 shadow-sm hover:shadow-2xl hover:border-[#712CDC]/50 transition-all duration-300 cursor-pointer overflow-hidden"
+      className="group relative flex flex-col justify-between rounded-3xl lg:rounded-[32px] border border-gray-200/90 bg-white p-6 lg:p-7 shadow-sm hover:shadow-2xl hover:border-[#712CDC]/50 transition-all duration-300 cursor-pointer overflow-hidden"
     >
       <div>
         {/* Top Badges */}
@@ -127,7 +127,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
         </div>
 
         {/* Large Product Image Showcase */}
-        <div className="relative h-56 w-full rounded-2xl bg-[#f8f6fc] p-6 flex items-center justify-center overflow-hidden border border-purple-50 group-hover:scale-[1.03] transition-transform duration-300">
+        <div className="relative h-60 lg:h-72 w-full rounded-2xl bg-[#f8f6fc] p-6 flex items-center justify-center overflow-hidden border border-purple-50 group-hover:scale-[1.03] transition-transform duration-300">
           <img
             src={product.images[0]}
             alt={product.name}
@@ -138,24 +138,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
 
         {/* Title & Tagline */}
         <div className="mt-4">
-          <h3 className="text-lg font-bold text-gray-950 leading-snug line-clamp-2 group-hover:text-[#712CDC] transition-colors">
+          <h3 className="text-lg lg:text-xl font-bold text-gray-950 leading-snug line-clamp-2 group-hover:text-[#712CDC] transition-colors">
             {product.name}
           </h3>
-          <p className="text-xs text-gray-500 line-clamp-1 mt-1">
+          <p className="text-xs lg:text-sm text-gray-500 line-clamp-1 mt-1">
             {product.tagline}
           </p>
         </div>
 
         {/* Large Pricing Row */}
-        <div className="mt-3 flex items-baseline gap-2 flex-wrap">
-          <span className="text-2xl font-black text-gray-950 tracking-tight">
+        <div className="mt-3.5 flex items-baseline gap-2 flex-wrap">
+          <span className="text-2xl lg:text-3xl font-black text-gray-950 tracking-tight">
             {formatINR(product.defaultPrice)}
           </span>
-          <span className="text-sm text-gray-400 line-through">
+          <span className="text-sm lg:text-base text-gray-400 line-through">
             {formatINR(product.defaultOriginalPrice)}
           </span>
           {discountPercent > 0 && (
-            <span className="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">
+            <span className="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-md">
               {discountPercent}% OFF
             </span>
           )}
@@ -190,10 +190,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
         {/* Action Button */}
         <button
           type="button"
-          className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#712CDC] to-[#8c27fc] hover:from-[#6023be] hover:to-[#781fd9] text-white font-bold text-sm shadow-md shadow-purple-600/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.98]"
+          className="w-full mt-2 py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#712CDC] to-[#8c27fc] hover:from-[#6023be] hover:to-[#781fd9] text-white font-bold text-sm lg:text-base shadow-md shadow-purple-600/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.98]"
         >
           <span>View 0% EMI Plans</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 lg:w-4.5 lg:h-4.5" />
         </button>
       </div>
     </div>
