@@ -1,10 +1,14 @@
 # 1Fi SDE Intern Assignment: 1Fi Marketplace
 
-[![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-purple.svg)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-6.0+-646CFF.svg)](https://vitejs.dev/)
-[![Status](https://img.shields.io/badge/Status-Completed-success.svg)]()
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Render_Hosted-712CDC?style=for-the-badge&logo=render&logoColor=white)](https://1fi-marketplace.onrender.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi)
+[![Status](https://img.shields.io/badge/Deployment-Live-success.svg?style=for-the-badge)]()
+
+> 🌐 **Live Hosted Web Application**: **[https://1fi-marketplace.onrender.com](https://1fi-marketplace.onrender.com)**  
+> 🔗 **GitHub Repository**: **[https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi](https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi)**  
+> 📱 **Phone Simulator**: Built-in interactive mobile toggle available directly inside the app header!
+
+---
 
 > A production-grade implementation of the **1Fi Marketplace** section within the **Shop** page of the 1Fi application, designed to faithfully mirror 1Fi's fintech design system, Loan Against Mutual Funds (LAMF) checkout financing model, and user experience.
 
