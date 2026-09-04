@@ -134,10 +134,31 @@ src/
    ```
    Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+---
+
+## 🚀 Deployment on Render
+
+This project includes a native `render.yaml` Blueprint specification for 1-click deployment on [Render](https://render.com).
+
+### Option 1: Static Site on Render (Recommended, Free, Instant Worldwide CDN)
+1. Log in to [Render Dashboard](https://dashboard.render.com/).
+2. Click **"New +"** ➔ **"Static Site"**.
+3. Connect repository: `https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi.git`.
+4. Configure settings:
+   - **Name**: `1fi-marketplace`
+   - **Branch**: `main`
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `dist`
+5. Click **"Create Static Site"**.
+6. Under **Settings ➔ Redirects/Rewrites**, ensure SPA routing rewrite rule:
+   - **Type**: `Rewrite`
+   - **Source**: `/*`
+   - **Destination**: `/index.html`
+
+### Option 2: Render Blueprint (1-Click Automated)
+1. In Render, click **"New +"** ➔ **"Blueprint"**.
+2. Connect `https://github.com/khatrisomay/SDE-Intern-Assignment-1Fi.git`.
+3. Render will read `render.yaml` and configure the build and rewrite routes automatically!
 
 ---
 
