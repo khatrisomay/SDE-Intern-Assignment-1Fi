@@ -3,12 +3,10 @@ import { DeviceFrame } from './components/layout/DeviceFrame';
 import { AppHeader } from './components/layout/AppHeader';
 import { BottomNav, NavTab } from './components/layout/BottomNav';
 import { ShopPage } from './components/shop/ShopPage';
+import { HomePage } from './components/home/HomePage';
 import {
-  TrendingUp,
   ReceiptIndianRupee,
   ShieldCheck,
-  Store,
-  ArrowRight,
 } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -31,31 +29,11 @@ export const App: React.FC = () => {
 
       {/* Main Content View based on Tab */}
       <main className="flex-1 overflow-x-hidden w-full">
-        {activeNavTab === 'shop' && <ShopPage />}
-
-        {/* Home Screen Preview */}
         {activeNavTab === 'home' && (
-          <div className="max-w-3xl mx-auto p-5 sm:p-8 flex flex-col items-center text-center space-y-4 pt-10 sm:pt-16">
-            <div className="h-16 w-16 rounded-3xl bg-purple-100 flex items-center justify-center text-[#712CDC]">
-              <TrendingUp className="w-8 h-8" />
-            </div>
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Welcome to 1Fi</h2>
-              <p className="text-sm text-gray-500 mt-2 max-w-md">
-                Unlock 0% interest EMIs on the 1Fi Marketplace using your mutual fund portfolio as security.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setActiveNavTab('shop')}
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#712CDC] hover:bg-[#6023be] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-purple-600/20 transition-all hover:scale-105"
-            >
-              <Store className="w-4 h-4" />
-              <span>Explore 1Fi Marketplace</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          <HomePage onNavigateToShop={() => setActiveNavTab('shop')} />
         )}
+
+        {activeNavTab === 'shop' && <ShopPage />}
 
         {/* EMI Dues Tab Preview */}
         {activeNavTab === 'emi-dues' && (
