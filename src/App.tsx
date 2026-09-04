@@ -109,7 +109,7 @@ export const App: React.FC = () => {
             </div>
             <div>
               <h3 className="text-lg font-bold text-gray-900">Somay Khatri</h3>
-              <p className="text-xs text-gray-500 mt-1">somay.khatri@example.com • +91 98765 43210</p>
+              <p className="text-xs text-gray-500 mt-1">somaykhatri6555@gmail.com • +91 9306394891</p>
             </div>
             <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full">
               <ShieldCheck className="w-4 h-4" /> KYC & CAMS Verified

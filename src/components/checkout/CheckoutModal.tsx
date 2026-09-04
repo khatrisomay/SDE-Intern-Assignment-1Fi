@@ -152,7 +152,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   </span>
                   <span className="text-[#712CDC] cursor-pointer">Edit</span>
                 </div>
-                <p className="font-bold text-gray-900 text-xs">Somay Khatri • +91 98765 43210</p>
+                <p className="font-bold text-gray-900 text-xs">Somay Khatri • +91 9306394891</p>
                 <p className="text-gray-600 text-xs">
                   Flat 402, DLF CyberCity, Sector 24, Gurugram, Haryana - 122002
                 </p>
