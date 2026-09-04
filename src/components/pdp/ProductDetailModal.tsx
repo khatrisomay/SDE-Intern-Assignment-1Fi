@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Product, ProductVariant } from '../../types/product';
 import { EMIPlan } from '../../types/emi';
 import { formatINR } from '../../utils/formatters';
@@ -14,6 +14,7 @@ import {
   Sparkles,
   ChevronDown,
   Check,
+  X,
 } from 'lucide-react';
 
 interface ProductDetailModalProps {
@@ -76,71 +77,103 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center animate-in fade-in duration-200">
-      <div className="relative w-full max-w-[500px] min-h-screen bg-white flex flex-col pb-28">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-0 md:p-6 lg:p-10 animate-in fade-in duration-200">
+      <div className="relative w-full max-w-[500px] md:max-w-4xl lg:max-w-5xl min-h-screen md:min-h-0 bg-white flex flex-col md:rounded-[32px] md:shadow-2xl overflow-hidden pb-28 md:pb-6 my-auto">
         
         {/* Top Sticky Nav */}
-        <div className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 py-3 bg-white/95 backdrop-blur-md border-b border-gray-100">
           <button
             type="button"
             onClick={onClose}
-            className="p-2 -ml-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors"
+            className="p-2 -ml-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors flex items-center gap-1.5 text-xs font-semibold"
             aria-label="Back to marketplace"
           >
             <ArrowLeft className="w-5 h-5" />
+            <span className="hidden sm:inline">Back</span>
           </button>
 
           <span className="text-xs font-bold uppercase tracking-wider text-[#712CDC] bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-100">
             {product.brand}
           </span>
 
-          <button
-            type="button"
-            onClick={() => {
-              if (navigator.share) {
-                navigator.share({ title: product.name, url: window.location.href }).catch(() => {});
-              }
-            }}
-            className="p-2 -mr-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
-            aria-label="Share product"
-          >
-            <Share2 className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({ title: product.name, url: window.location.href }).catch(() => {});
+                }
+              }}
+              className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
+              aria-label="Share product"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="hidden md:flex p-2 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+              aria-label="Close modal"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Product Images Showcase */}
-        <div className="relative bg-[#f8f6fc] pt-4 pb-6 px-4 flex flex-col items-center">
-          <div className="relative h-64 w-full max-w-[280px] flex items-center justify-center">
-            <img
-              src={product.images[activeImageIndex] || product.images[0]}
-              alt={product.name}
-              className="max-h-full max-w-full object-contain mix-blend-multiply drop-shadow-md transition-all duration-300"
-            />
+        {/* 2-Column Responsive Body */}
+        <div className="md:grid md:grid-cols-12 flex-1 items-start">
+          {/* Left Column (Images & Trust Guarantees on Desktop) */}
+          <div className="md:col-span-5 bg-[#f8f6fc] pt-4 pb-6 px-4 sm:px-6 flex flex-col items-center border-b md:border-b-0 md:border-r border-gray-100 md:sticky md:top-0">
+            <div className="relative h-64 sm:h-72 w-full max-w-[280px] sm:max-w-[320px] flex items-center justify-center">
+              <img
+                src={product.images[activeImageIndex] || product.images[0]}
+                alt={product.name}
+                className="max-h-full max-w-full object-contain mix-blend-multiply drop-shadow-md transition-all duration-300"
+              />
+            </div>
+
+            {/* Thumbnails */}
+            {product.images.length > 1 && (
+              <div className="flex gap-2 mt-4">
+                {product.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveImageIndex(idx)}
+                    className={`h-12 w-12 rounded-xl border p-1 bg-white transition-all ${
+                      activeImageIndex === idx
+                        ? 'border-[#712CDC] ring-2 ring-[#712CDC]/20'
+                        : 'border-gray-200 opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={img} alt="" className="h-full w-full object-contain mix-blend-multiply" />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Trust Badges under image on Desktop */}
+            <div className="hidden md:grid grid-cols-3 gap-2 py-4 mt-6 border-t border-purple-100/70 text-center w-full">
+              <div className="flex flex-col items-center">
+                <Truck className="w-4 h-4 text-[#712CDC] mb-1" />
+                <span className="text-[11px] font-bold text-gray-900">Free Delivery</span>
+                <span className="text-[9.5px] text-gray-400">Within {product.deliveryDays} day</span>
+              </div>
+              <div className="flex flex-col items-center border-x border-gray-200">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 mb-1" />
+                <span className="text-[11px] font-bold text-gray-900">Brand Warranty</span>
+                <span className="text-[9.5px] text-gray-400">1 Year Genuine</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <RotateCcw className="w-4 h-4 text-[#712CDC] mb-1" />
+                <span className="text-[11px] font-bold text-gray-900">7 Days Return</span>
+                <span className="text-[9.5px] text-gray-400">Free replacement</span>
+              </div>
+            </div>
           </div>
 
-          {/* Thumbnails */}
-          {product.images.length > 1 && (
-            <div className="flex gap-2 mt-4">
-              {product.images.map((img, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => setActiveImageIndex(idx)}
-                  className={`h-12 w-12 rounded-xl border p-1 bg-white transition-all ${
-                    activeImageIndex === idx
-                      ? 'border-[#712CDC] ring-2 ring-[#712CDC]/20'
-                      : 'border-gray-200 opacity-60 hover:opacity-100'
-                  }`}
-                >
-                  <img src={img} alt="" className="h-full w-full object-contain mix-blend-multiply" />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Product Details Content */}
-        <div className="p-4 flex flex-col gap-5">
+          {/* Right Column (Info, Variants, EMI Plans, Specs, CTA) */}
+          <div className="md:col-span-7 p-4 sm:p-6 flex flex-col gap-5">
           {/* Title & Ratings */}
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -263,8 +296,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             )}
           </div>
 
-          {/* Delivery & Trust Guarantees */}
-          <div className="grid grid-cols-3 gap-2 py-3 border-y border-gray-100 text-center">
+          {/* Delivery & Trust Guarantees (Mobile Only) */}
+          <div className="grid md:hidden grid-cols-3 gap-2 py-3 border-y border-gray-100 text-center">
             <div className="flex flex-col items-center">
               <Truck className="w-4 h-4 text-[#712CDC] mb-1" />
               <span className="text-[11px] font-bold text-gray-900">Free Delivery</span>
@@ -355,20 +388,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
             )}
           </div>
-        </div>
 
-        {/* Sticky Bottom Action Bar with CTA */}
-        <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-lg">
-          <div className="mx-auto max-w-[500px] flex items-center justify-between gap-3">
+          {/* Desktop Inline Action Bar */}
+          <div className="hidden md:flex items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-purple-50 via-[#faf7ff] to-purple-50 border border-purple-100 mt-2 shadow-xs">
             <div>
-              <span className="text-[10px] text-gray-500 font-medium block">
-                {activePlan?.tenureMonths} Months EMI
+              <span className="text-[11px] text-gray-500 font-semibold block">
+                {activePlan?.tenureMonths} Months EMI Plan
               </span>
               <div className="flex items-baseline gap-1">
-                <span className="text-lg font-black text-gray-950">
+                <span className="text-2xl font-black text-gray-950">
                   {formatINR(activePlan?.monthlyEMI || 0)}
                 </span>
-                <span className="text-xs text-gray-500">/mo</span>
+                <span className="text-xs text-gray-500 font-bold">/mo</span>
               </div>
             </div>
 
@@ -382,13 +413,47 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   downPayment: downPaymentAmount,
                 })
               }
-              className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#712CDC] to-[#8c27fc] hover:from-[#6423c7] hover:to-[#7b1fe0] text-white font-bold text-sm shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              className="py-3 px-6 rounded-xl bg-gradient-to-r from-[#712CDC] to-[#8c27fc] hover:from-[#6423c7] hover:to-[#7b1fe0] text-white font-bold text-sm shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Proceed with {activePlan?.tenureMonths}M Plan</span>
               <span className="text-xs bg-white/20 px-1.5 py-0.5 rounded font-mono">→</span>
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Bottom Action Bar with CTA (Mobile Only) */}
+      <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-lg md:hidden">
+        <div className="mx-auto max-w-[500px] flex items-center justify-between gap-3">
+          <div>
+            <span className="text-[10px] text-gray-500 font-medium block">
+              {activePlan?.tenureMonths} Months EMI
+            </span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-lg font-black text-gray-950">
+                {formatINR(activePlan?.monthlyEMI || 0)}
+              </span>
+              <span className="text-xs text-gray-500">/mo</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              onProceedToCheckout({
+                product,
+                variant: selectedVariant,
+                emiPlan: activePlan,
+                downPayment: downPaymentAmount,
+              })
+            }
+            className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-[#712CDC] to-[#8c27fc] hover:from-[#6423c7] hover:to-[#7b1fe0] text-white font-bold text-sm shadow-md shadow-purple-600/30 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+          >
+            <span>Proceed with {activePlan?.tenureMonths}M Plan</span>
+            <span className="text-xs bg-white/20 px-1.5 py-0.5 rounded font-mono">→</span>
+          </button>
+        </div>
+      </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Wifi, Battery, Signal } from 'lucide-react';
 
 interface DeviceFrameProps {
@@ -9,10 +9,8 @@ interface DeviceFrameProps {
 export const DeviceFrame: React.FC<DeviceFrameProps> = ({ children, isDesktopFrame }) => {
   if (!isDesktopFrame) {
     return (
-      <div className="min-h-screen bg-gray-50 flex justify-center">
-        <div className="w-full max-w-[500px] min-h-screen bg-white relative shadow-sm flex flex-col">
-          {children}
-        </div>
+      <div className="min-h-screen bg-white text-gray-900 flex flex-col w-full antialiased selection:bg-[#712CDC]/10 selection:text-[#712CDC]">
+        {children}
       </div>
     );
   }

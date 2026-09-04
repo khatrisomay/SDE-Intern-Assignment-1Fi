@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Product } from '../../types/product';
 import { ProductCard } from './ProductCard';
 import { ProductSkeleton } from './ProductSkeleton';
@@ -79,7 +79,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         <span>0% Interest with Mutual Funds</span>
       </div>
 
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
         {products.map((product) => (
           <ProductCard
             key={product.id}

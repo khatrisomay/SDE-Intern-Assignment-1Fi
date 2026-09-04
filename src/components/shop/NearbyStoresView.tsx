@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NearbyStore } from '../../types/store';
 import { apiService } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
@@ -142,11 +142,11 @@ export const NearbyStoresView: React.FC = () => {
 
       {/* Stores List */}
       {loading ? (
-        <div className="space-y-3">
-          {[1, 2, 3].map((i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
-              className="h-32 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
+              className="h-36 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
             />
           ))}
         </div>
@@ -158,7 +158,7 @@ export const NearbyStoresView: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {stores.map((store) => (
             <div
               key={store.id}
@@ -229,10 +229,10 @@ export const NearbyStoresView: React.FC = () => {
         </div>
       )}
 
-      {/* Location Selection Drawer matching app.1fi.in */}
+      {/* Location Selection Drawer */}
       {showLocationDrawer && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-[420px] bg-white rounded-[28px] overflow-hidden shadow-2xl my-auto p-5 space-y-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-[420px] sm:max-w-md bg-white rounded-[28px] overflow-hidden shadow-2xl my-auto p-5 space-y-4">
             <div className="flex items-center justify-between border-b border-gray-100 pb-2">
               <h3 className="text-base font-bold text-gray-900">Select Your Location</h3>
               <button
@@ -304,8 +304,8 @@ export const NearbyStoresView: React.FC = () => {
 
       {/* Interactive Pay at Store (POS) Counter Modal */}
       {activeStore && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-[440px] bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto p-5 space-y-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-[440px] sm:max-w-lg bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto p-5 sm:p-7 space-y-4">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
                 <QrCode className="h-5 w-5 text-[#712CDC]" />

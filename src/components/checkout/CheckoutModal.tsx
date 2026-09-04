@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Product, ProductVariant } from '../../types/product';
 import { EMIPlan, PledgedFund, CheckoutOrder } from '../../types/emi';
 import { apiService } from '../../services/api';
@@ -89,8 +89,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-2 sm:p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-[480px] bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-2 sm:p-6 animate-in fade-in duration-200">
+      <div className="relative w-full max-w-[480px] sm:max-w-xl md:max-w-2xl bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto flex flex-col max-h-[92vh]">
         
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white sticky top-0 z-10">

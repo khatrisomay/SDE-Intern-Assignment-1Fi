@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { DeviceFrame } from './components/layout/DeviceFrame';
 import { AppHeader } from './components/layout/AppHeader';
 import { BottomNav, NavTab } from './components/layout/BottomNav';
@@ -25,57 +25,59 @@ export const App: React.FC = () => {
         availableLimit={352000}
         isDesktopFrame={isDesktopFrame}
         onToggleFrame={() => setIsDesktopFrame((prev) => !prev)}
+        activeNavTab={activeNavTab}
+        onTabChange={setActiveNavTab}
       />
 
       {/* Main Content View based on Tab */}
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden w-full">
         {activeNavTab === 'shop' && <ShopPage />}
 
         {/* Home Screen Preview */}
         {activeNavTab === 'home' && (
-          <div className="p-5 flex flex-col items-center text-center space-y-4 pt-10">
+          <div className="max-w-3xl mx-auto p-5 sm:p-8 flex flex-col items-center text-center space-y-4 pt-10 sm:pt-16">
             <div className="h-16 w-16 rounded-3xl bg-purple-100 flex items-center justify-center text-[#712CDC]">
               <TrendingUp className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Welcome to 1Fi</h2>
-              <p className="text-xs text-gray-500 mt-1 max-w-xs">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Welcome to 1Fi</h2>
+              <p className="text-sm text-gray-500 mt-2 max-w-md">
                 Unlock 0% interest EMIs on the 1Fi Marketplace using your mutual fund portfolio as security.
               </p>
             </div>
             <button
               type="button"
               onClick={() => setActiveNavTab('shop')}
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#712CDC] px-5 py-3 text-xs font-bold text-white shadow-md shadow-purple-600/20"
+              className="inline-flex items-center gap-2 rounded-2xl bg-[#712CDC] hover:bg-[#6023be] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-purple-600/20 transition-all hover:scale-105"
             >
               <Store className="w-4 h-4" />
               <span>Explore 1Fi Marketplace</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         )}
 
         {/* EMI Dues Tab Preview */}
         {activeNavTab === 'emi-dues' && (
-          <div className="p-5 space-y-4 pt-6">
+          <div className="max-w-3xl mx-auto p-5 sm:p-8 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">Your EMI Dues</h2>
-              <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+              <h2 className="text-xl font-bold text-gray-900">Your EMI Dues</h2>
+              <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
                 All Up to Date
               </span>
             </div>
-            <div className="rounded-2xl border border-gray-200 bg-white p-5 text-center space-y-2">
-              <ReceiptIndianRupee className="w-8 h-8 text-gray-400 mx-auto" />
-              <p className="text-sm font-bold text-gray-900">No active dues pending</p>
-              <p className="text-xs text-gray-500">
+            <div className="rounded-3xl border border-gray-200 bg-white p-8 sm:p-12 text-center space-y-3 shadow-xs">
+              <ReceiptIndianRupee className="w-10 h-10 text-gray-400 mx-auto" />
+              <p className="text-base font-bold text-gray-900">No active dues pending</p>
+              <p className="text-xs text-gray-500 max-w-sm mx-auto">
                 Purchase your first gadget on 1Fi Marketplace to view installment schedules here.
               </p>
               <button
                 type="button"
                 onClick={() => setActiveNavTab('shop')}
-                className="mt-2 text-xs font-bold text-[#712CDC] hover:underline inline-flex items-center gap-1"
+                className="mt-3 text-xs font-bold text-[#712CDC] hover:underline inline-flex items-center gap-1"
               >
-                <span>Browse Products</span> →
+                <span>Browse Marketplace</span> →
               </button>
             </div>
           </div>
@@ -83,17 +85,17 @@ export const App: React.FC = () => {
 
         {/* Limit Tab Preview */}
         {activeNavTab === 'limit' && (
-          <div className="p-5 space-y-4 pt-6">
+          <div className="max-w-3xl mx-auto p-5 sm:p-8 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-gray-900">Credit Limit & Holdings</h2>
+              <h2 className="text-xl font-bold text-gray-900">Credit Limit & Holdings</h2>
             </div>
-            <div className="rounded-2xl bg-gradient-to-br from-[#712CDC] to-[#8c27fc] text-white p-5 space-y-3 shadow-lg">
-              <span className="text-[11px] font-semibold text-purple-200 uppercase tracking-wider">
+            <div className="rounded-3xl bg-gradient-to-br from-[#712CDC] via-[#8232e8] to-[#9c4cfb] text-white p-6 sm:p-8 space-y-4 shadow-xl shadow-purple-900/10">
+              <span className="text-xs font-bold text-purple-200 uppercase tracking-wider">
                 Total Available Limit
               </span>
-              <h3 className="text-3xl font-black">₹3,52,000</h3>
-              <p className="text-xs text-purple-100">
-                Backed by ₹4,40,900 across 4 mutual funds (CAMS & KFintech verified).
+              <h3 className="text-4xl sm:text-5xl font-black">₹3,52,000</h3>
+              <p className="text-xs sm:text-sm text-purple-100 max-w-lg">
+                Backed by ₹4,40,900 across 4 mutual funds (CAMS & KFintech verified). Zero liquidations.
               </p>
             </div>
           </div>
@@ -101,16 +103,16 @@ export const App: React.FC = () => {
 
         {/* Profile Tab Preview */}
         {activeNavTab === 'profile' && (
-          <div className="p-5 space-y-4 pt-6 text-center">
-            <div className="h-16 w-16 rounded-full bg-purple-100 text-[#712CDC] mx-auto flex items-center justify-center font-bold text-xl">
+          <div className="max-w-xl mx-auto p-5 sm:p-8 space-y-5 pt-6 text-center">
+            <div className="h-20 w-20 rounded-full bg-purple-100 text-[#712CDC] mx-auto flex items-center justify-center font-bold text-2xl shadow-inner">
               SK
             </div>
             <div>
-              <h3 className="text-base font-bold text-gray-900">Somay Khatri</h3>
-              <p className="text-xs text-gray-500">somay.khatri@example.com • +91 98765 43210</p>
+              <h3 className="text-lg font-bold text-gray-900">Somay Khatri</h3>
+              <p className="text-xs text-gray-500 mt-1">somay.khatri@example.com • +91 98765 43210</p>
             </div>
-            <div className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-              <ShieldCheck className="w-3.5 h-3.5" /> KYC & CAMS Verified
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full">
+              <ShieldCheck className="w-4 h-4" /> KYC & CAMS Verified
             </div>
           </div>
         )}

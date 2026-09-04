@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TopBrand } from '../../types/store';
 import { apiService } from '../../services/api';
 import { formatINR } from '../../utils/formatters';
@@ -119,11 +119,11 @@ export const TopBrandsView: React.FC = () => {
 
       {/* Brands List */}
       {loading ? (
-        <div className="space-y-3">
-          {[1, 2, 3].map((i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div
               key={i}
-              className="h-28 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
+              className="h-36 rounded-2xl bg-white border border-gray-100 p-4 animate-pulse"
             />
           ))}
         </div>
@@ -133,11 +133,11 @@ export const TopBrandsView: React.FC = () => {
           <p className="text-xs text-gray-500 mt-1">Try searching for a different brand name.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className="group rounded-2xl border border-zinc-200/90 bg-white p-4 shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200"
+              className="group rounded-2xl border border-zinc-200/90 bg-white p-4 shadow-sm hover:shadow-md hover:border-[#712CDC]/40 transition-all duration-200 flex flex-col justify-between"
             >
               {/* Header row */}
               <div className="flex items-center justify-between">
@@ -205,8 +205,8 @@ export const TopBrandsView: React.FC = () => {
 
       {/* Interactive 1Fi Virtual Card Generation Modal */}
       {activeBrand && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-[440px] bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto p-5 space-y-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-[440px] sm:max-w-lg bg-white rounded-[32px] overflow-hidden shadow-2xl my-auto p-5 sm:p-7 space-y-4">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
                 <img
